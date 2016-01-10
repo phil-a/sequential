@@ -3,6 +3,9 @@ Sequences = new Meteor.Collection('sequences');
 Sequences.allow({
   insert: function(userId, doc) {
     return !!userId;
+  },
+  update: function(userId, doc) {
+    return !!userId;
   }
 });
 

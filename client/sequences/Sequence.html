@@ -9,5 +9,6 @@
     {{/each}}
   </p>
   <a href = "/sequence/{{_id}}">View Details</a>
+  {{> quickForm collection="Sequences" id=updateSequenceId type="update" doc=this autosave=true}}
   </article>
 </template>
