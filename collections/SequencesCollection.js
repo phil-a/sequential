@@ -11,9 +11,9 @@ SubSequence = new SimpleSchema({
     type: String,
     label: "Name"
   },
-  desc: {
+  motiv: {
     type: String,
-    label: "Description"
+    label: "Motivation"
   },
   amount: {
     type: Number,
@@ -22,30 +22,13 @@ SubSequence = new SimpleSchema({
     max: 300
   },
   freq: {
-    type: Number,
+    type: String,
+    label: "Choose a frequency",
     allowedValues: [
-       1,
-       2,
-       3
-    ],
-    optional: true,
-    label: "Select a Frequency",
-    autoform: {
-       options: [
-          {
-             label: "Per Day",
-             value: 1
-          },
-          {
-             label: "Per Week",
-             value: 2
-          },
-          {
-             label: "Per Month",
-             value: 3
-          }
-       ]
-    }
+       "per day",
+       "per week",
+       "per month"
+    ]
   },
   logs: {
     type: [Date]
@@ -77,9 +60,9 @@ SequenceSchema = new SimpleSchema({
     type: String,
     label: "Name"
   },
-  desc: {
+  motiv: {
     type: String,
-    label: "Description"
+    label: "What is your motivation for doing this?"
   },
   subsequences: {
     type: [SubSequence]

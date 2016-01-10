@@ -1,0 +1,12 @@
+<template name = "Sequence">
+  <article class="sequence">
+  <h3>{{name}}</h3>
+  <p>{{motiv}}</p>  
+  <p>
+    {{#each subsequences}}
+      <span class="subsequence">{{name}} -- {{motiv}} -- I need to do this {{amount}} times {{freq}}
+      </span>
+    {{/each}}
+  </p>
+  </article>
+</template>
