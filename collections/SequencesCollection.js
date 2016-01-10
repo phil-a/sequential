@@ -6,7 +6,7 @@ Sequences.allow({
   }
 });
 
-SequenceSchema = new SimpleSchema({
+SubSequence = new SimpleSchema({
   name: {
     type: String,
     label: "Name"
@@ -21,7 +21,7 @@ SequenceSchema = new SimpleSchema({
     min: 0,
     max: 300
   },
-  choose: {
+  freq: {
     type: Number,
     allowedValues: [
        1,
@@ -46,7 +46,52 @@ SequenceSchema = new SimpleSchema({
           }
        ]
     }
- },
+  },
+  logs: {
+    type: [Date]
+  },
+  author: {
+    type: String,
+    label: "Author",
+    autoValue: function() {
+      return this.userId
+    },
+    autoform: {
+      type: "hidden"
+    }
+  },
+  createdAt: {
+    type: Date,
+    label: "Created At",
+    autoValue: function() {
+      return new Date()
+    },
+    autoform: {
+      type: "hidden"
+    }
+  }
+});
+
+SequenceSchema = new SimpleSchema({
+  name: {
+    type: String,
+    label: "Name"
+  },
+  desc: {
+    type: String,
+    label: "Description"
+  },
+  subsequences: {
+    type: [SubSequence]
+   },
+  isActive:{
+    type: Boolean,
+    defaultValue: false,
+    optional: true,
+    autoform: {
+      type: "hidden"
+    }
+  },
   author: {
     type: String,
     label: "Author",
