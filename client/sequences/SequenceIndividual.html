@@ -1,0 +1,9 @@
+<template name="SequenceIndividual">
+<h1>{{sequence.name}}</h1>
+<h3>Your reason: {{sequence.motiv}}</h3>
+{{#each sequence.subsequences}}
+      <span class="subsequence">{{name}} -- {{motiv}} -- I need to do this {{amount}} times {{freq}}
+      </span><br>{{logs}}<br>
+{{/each}}
+<h3>Started on: {{sequence.createdAt}}</h3>
+</template>

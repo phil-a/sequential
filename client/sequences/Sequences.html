@@ -1,8 +1,12 @@
 <template name = "Sequences">
   {{> NewSequence}}
   <section class="sequences">
-    {{#each sequences}}
-      {{> Sequence}}
-    {{/each}}  
+    {{#if Template.subscriptionsReady}}
+      {{#each sequences}}
+        {{> Sequence}}
+      {{/each}}
+    {{else}}
+      <p>Loading Your Sequences</p>
+    {{/if}}  
   </section>
 </template>
