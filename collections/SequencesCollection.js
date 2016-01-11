@@ -107,6 +107,9 @@ Meteor.methods({
         isActive: !currentState
       }
     });
+  },
+  deleteSequence: function(id) {
+    Sequences.remove(id);
   }
 });
 
