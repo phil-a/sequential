@@ -100,4 +100,14 @@ SequenceSchema = new SimpleSchema({
   }
 });
 
+Meteor.methods({
+  toggleActiveItem: function(id, currentState) {
+    Sequences.update(id, {
+      $set: {
+        isActive: !currentState
+      }
+    });
+  }
+});
+
 Sequences.attachSchema(SequenceSchema);

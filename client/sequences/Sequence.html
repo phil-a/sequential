@@ -1,5 +1,5 @@
 <template name = "Sequence">
-  <article class="sequence">
+  <article class="sequence {{#if isActive}}is-active{{/if}}">
   <h3>{{name}}</h3>
   <p>{{motiv}}</p>  
   <p>
@@ -9,6 +9,8 @@
     {{/each}}
   </p>
   <a href = "/sequence/{{_id}}">View Details</a>
+  <button class="btn-primary toggle-menu add-to-active">Make Active</button>
+  <button class="btn-deny toggle-menu remove-from-active">Deactivate</button>
   {{> quickForm collection="Sequences" id=updateSequenceId type="update" doc=this autosave=true}}
   </article>
 </template>

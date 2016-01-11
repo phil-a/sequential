@@ -315,17 +315,19 @@ input, select, textarea
     position relative 
     z-index 1
     shadow-level(1)
+    .add-to-active
+        display block
     trans()
-    .remove-from-menu
+    .remove-from-active
         display none
-    &.in-menu
+    &.is-active
         background grey
         color #FFF
         h3
             border-bottom: rgba(255,255,255, 0.6) solid 3px
-        .add-to-menu
+        .add-to-active
             display none
-        .remove-from-menu  
+        .remove-from-active  
             display block
     h3
         font-size: 3em;

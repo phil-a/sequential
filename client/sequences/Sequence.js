@@ -3,3 +3,9 @@ Template.Sequence.helpers({
     return this._id;
   }
 });
+
+Template.Sequence.events({
+  'click .toggle-menu': function() {
+    Meteor.call('toggleActiveItem', this._id, this.isActive);
+  }
+});

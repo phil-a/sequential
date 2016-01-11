@@ -3,7 +3,10 @@
 <h3>Your reason: {{sequence.motiv}}</h3>
 {{#each sequence.subsequences}}
       <span class="subsequence">{{name}} -- {{motiv}} -- I need to do this {{amount}} times {{freq}}
-      </span><br>{{logs}}<br>
+      </span>
+      {{#each logs}}
+        <li>{{this}}</li>
+      {{/each}}
 {{/each}}
 <h3>Started on: {{sequence.createdAt}}</h3>
 </template>
