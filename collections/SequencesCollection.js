@@ -9,14 +9,14 @@ Sequences.allow({
   }
 });
 
-SubSequence = new SimpleSchema({
+SequenceSchema = new SimpleSchema({
   name: {
     type: String,
     label: "Name"
   },
   motiv: {
     type: String,
-    label: "Motivation"
+    label: "What is your motivation for doing this?"
   },
   amount: {
     type: Number,
@@ -33,46 +33,16 @@ SubSequence = new SimpleSchema({
        "per month"
     ]
   },
-  logs: {
-    type: [Date]
-  },
-  author: {
-    type: String,
-    label: "Author",
-    autoValue: function() {
-      return this.userId
-    },
-    autoform: {
-      type: "hidden"
-    }
-  },
-  createdAt: {
-    type: Date,
-    label: "Created At",
-    autoValue: function() {
-      return new Date()
-    },
-    autoform: {
-      type: "hidden"
-    }
-  }
-});
-
-SequenceSchema = new SimpleSchema({
-  name: {
-    type: String,
-    label: "Name"
-  },
-  motiv: {
-    type: String,
-    label: "What is your motivation for doing this?"
-  },
-  subsequences: {
-    type: [SubSequence]
-   },
   isActive:{
     type: Boolean,
     defaultValue: false,
+    optional: true,
+    autoform: {
+      type: "hidden"
+    }
+  },
+  logs: {
+    type: [Date],
     optional: true,
     autoform: {
       type: "hidden"
@@ -107,6 +77,36 @@ Meteor.methods({
         isActive: !currentState
       }
     });
+  },
+  pushDateIntoLogs: function(id, logs) {
+    //check for empty array
+    if (logs == undefined){
+      logs = new Array;
+      logs.push(currentDate);
+      Sequences.update(id, {
+        $set: {
+          logs: logs
+        }
+      });
+    }
+    else{
+      lastDate = logs[logs.length-1];
+      currentDate = new Date();
+      //do not push if log exists today
+      if ( (lastDate.getFullYear() == currentDate.getFullYear()) &&  (lastDate.getMonth() == currentDate.getMonth()) && (lastDate.getDate() == currentDate.getDate()) )
+      {
+        console.log("Cannot log twice in one day")
+      }
+      //if log does not exist for today
+      else{
+        logs.push(currentDate);
+        Sequences.update(id, {
+          $set: {
+            logs: logs
+          }
+        });
+      }
+    }
   },
   deleteSequence: function(id) {
     Sequences.remove(id);

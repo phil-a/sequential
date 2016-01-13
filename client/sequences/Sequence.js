@@ -20,5 +20,8 @@ Template.Sequence.events({
   },
   'click .fa-pencil' : function (event, template){
     template.editMode.set(!template.editMode.get());
-  }
+  },
+  'click .toggle-logged': function() {
+    Meteor.call('pushDateIntoLogs', this._id, this.logs);
+  },
 });
