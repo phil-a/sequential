@@ -32,14 +32,14 @@
         window.d3vis.color.domain(names.map(function(d) { return d.name}));
 
         // Get the players
-        players = Sequences.find({isActive: true}, {sort: {logs: 1 , name: 1}}).fetch()
+        players = Sequences.find({isActive: true}, {sort: {logsCount: -1, name: 1}}).fetch()
         window.d3vis.x.domain(players.map(function(d) { return d.name}));
         window.d3vis.y.domain([0, d3.max(players, function(d) {
-          if (d.logs == undefined){
-            return 0;
+          if (typeof d.logs !== 'undefined' && d.logs.length > 0) {
+            return d.logs.length;
           }
          else {
-          return d.logs.length;
+            return 0;
           }
           }
          )]);
@@ -59,19 +59,19 @@
           .attr("x", function(d) { return window.d3vis.x(d.name);})
           .attr("width", window.d3vis.x.rangeBand())
           .attr("y", function(d) { 
-          if (d.logs == undefined){
-            return window.d3vis.y(0); 
+          if (typeof d.logs !== 'undefined' && d.logs.length > 0) {
+            return window.d3vis.y(d.logs.length); 
           }
          else {
-            return window.d3vis.y(d.logs.length); 
+            return window.d3vis.y(0); 
           }
           })
           .attr("height", function(d) { 
-          if (d.logs == undefined){
-            return window.d3vis.height - window.d3vis.y(0); 
-          }
-         else {
+          if (typeof d.logs !== 'undefined' && d.logs.length > 0) {
             return window.d3vis.height - window.d3vis.y(d.logs.length); 
+          }
+          else {
+            return window.d3vis.height - window.d3vis.y(0); 
           }
           })
           .style("fill", function(d) { return window.d3vis.color(d.name);})
@@ -85,28 +85,29 @@
           .attr()
           .attr("x", function(d) { return window.d3vis.x(d.name) + 10;})
           .attr("y", function(d) { 
-          if (d.logs == undefined){
-            return window.d3vis.y(0) - 2; 
+          if (typeof d.logs !== 'undefined' && d.logs.length > 0) {
+            return window.d3vis.y(d.logs.length); 
           }
          else {
-            return window.d3vis.y(d.logs.length); 
+            return window.d3vis.y(0) - 2; 
           }
           })
           //label
           .text(function(d) {
-          if (d.logs == undefined){
-            return d.name + " --> " + 0;
-          }
-         else {
+
+          if (typeof d.logs !== 'undefined' && d.logs.length > 0) {
             return d.name + " --> " + (d.logs[d.logs.length-1]).getMonth()+1 + "/" + (d.logs[d.logs.length-1]).getDate();
+          }
+          else{
+            return d.name + " --> " + 0;
           }
           })
           .attr("height", function(d) { 
-          if (d.logs == undefined){
-            return window.d3vis.height - window.d3vis.y(0); 
+          if (typeof d.logs !== 'undefined' && d.logs.length > 0) {
+            return window.d3vis.height - window.d3vis.y(d.logs.length); 
           }
          else {
-            return window.d3vis.height - window.d3vis.y(d.logs.length); 
+            return window.d3vis.height - window.d3vis.y(0); 
           }
           })
       });

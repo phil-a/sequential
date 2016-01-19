@@ -46,7 +46,16 @@ SequenceSchema = new SimpleSchema({
     optional: true,
     autoform: {
       type: "hidden"
-    }
+    },
+    defaultValue: []
+  },
+  logsCount: {
+    type: Number,
+    optional: true,
+    autoform: {
+      type: "hidden"
+    },
+    defaultValue: 0
   },
   author: {
     type: String,
@@ -79,14 +88,29 @@ Meteor.methods({
     });
   },
   pushDateIntoLogs: function(id, logs) {
-    //check for empty array
+    //check for non existing array
     if (logs == undefined){
       currentDate = new Date();
       logs = new Array;
       logs.push(currentDate);
       Sequences.update(id, {
         $set: {
+          logs: logs,
+        },
+        $inc: {
+          logsCount: 1,
+        }
+      });
+    }
+    else if (logs.length == 0){
+      currentDate = new Date();
+      logs.push(currentDate);
+      Sequences.update(id, {
+        $set: {
           logs: logs
+        },
+        $inc: {
+          logsCount: 1,
         }
       });
     }
@@ -104,7 +128,10 @@ Meteor.methods({
         Sequences.update(id, {
           $set: {
             logs: logs
-          }
+          },
+        $inc: {
+          logsCount: 1,
+        }
         });
       }
     }
