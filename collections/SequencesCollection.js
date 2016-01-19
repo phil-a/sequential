@@ -81,6 +81,7 @@ Meteor.methods({
   pushDateIntoLogs: function(id, logs) {
     //check for empty array
     if (logs == undefined){
+      currentDate = new Date();
       logs = new Array;
       logs.push(currentDate);
       Sequences.update(id, {

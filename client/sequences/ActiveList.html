@@ -1,7 +1,10 @@
 <template name="ActiveList">
 <h1 class="page-title">Current Active Sequences</h1>
+{{> d3vis}}
   {{#each sequences}}
-    <h3>{{name}}</h3>
-    <p>{{motiv}}</p>
+    <h3>{{name}} -- {{amount}} {{freq}}</h3>
+    {{#each logs}}
+    <li>{{this}}</li>
+    {{/each}}
   {{/each}}
 </template>
