@@ -12,9 +12,7 @@
   <i class="fa fa-pencil"></i>
   <a href = "/sequence/{{_id}}">View Details</a>
   <button class="btn-primary toggle-menu add-to-active">Make Active</button>
-  <button class="btn-deny toggle-menu remove-from-active">Deactivate</button>
-  <button class="btn-primary toggle-logged remove-from-logged">Log this today</button>
-  {{#if editMode}}
+  <button class="btn-deny toggle-menu remove-from-active">Deactivate</button>  {{#if editMode}}
     {{> quickForm collection="Sequences" id=updateSequenceId type="update" doc=this autosave=true}}
   {{/if}}
   </article>

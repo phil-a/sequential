@@ -12,7 +12,7 @@ Sequences.allow({
 SequenceSchema = new SimpleSchema({
   name: {
     type: String,
-    label: "Name"
+    label: "Name for your task"
   },
   motiv: {
     type: String,
@@ -80,6 +80,17 @@ SequenceSchema = new SimpleSchema({
 });
 
 Meteor.methods({
+  initializeCalendar: function() {
+  var cal = new CalHeatMap();
+  cal.init({
+  domain: "month",
+  subDomain: "day",
+  cellSize: 20,
+  subDomainTextFormat: "%d",
+  range: 1,
+  displayLegend: false
+  });
+  },
   toggleActiveItem: function(id, currentState) {
     Sequences.update(id, {
       $set: {

@@ -3,8 +3,11 @@
 {{> d3vis}}
   {{#each sequences}}
     <h3>{{name}} -- {{amount}} {{freq}}</h3>
+      <button class="btn-primary toggle-logged remove-from-logged">Log this today</button>      
+      <button class="btn-primary toggle-heatmap">View Heatmap</button>
     {{#each logs}}
     <li>{{this}}</li>
     {{/each}}
   {{/each}}
+    <div id="cal-heatmap"></div>
 </template>

@@ -47,6 +47,8 @@
         // Two selectors (this could be streamlined...)
         var bar_selector = window.d3vis.svg.selectAll(".bar")
           .data(players, function (d) {return d.name})
+        var yTextPadding = 20;
+
         var text_selector = window.d3vis.svg.selectAll(".bar_text")
           .data(players, function (d) {return d.name})
 
@@ -92,14 +94,15 @@
             return window.d3vis.y(0) - 2; 
           }
           })
+
           //label
           .text(function(d) {
 
           if (typeof d.logs !== 'undefined' && d.logs.length > 0) {
-            return d.name + " --> " + (d.logs[d.logs.length-1]).getMonth()+1 + "/" + (d.logs[d.logs.length-1]).getDate();
+            return d.name + " - " + d.logsCount;
           }
           else{
-            return d.name + " --> " + 0;
+            return d.name;
           }
           })
           .attr("height", function(d) { 
